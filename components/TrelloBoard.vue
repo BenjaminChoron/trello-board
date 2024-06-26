@@ -39,9 +39,11 @@ const columns = ref<Column[]>([
       class="column bg-gray-200 p-5 rounded min-w-[250px]"
     >
       <header>{{ column.title }}</header>
-      <p v-for="task in column.tasks" :key="task.id">
-        {{ task.title }}
-      </p>
+      <TrelloBoardTask
+        v-for="task in column.tasks"
+        :key="task.id"
+        :task="task"
+      />
     </div>
   </div>
 </template>
