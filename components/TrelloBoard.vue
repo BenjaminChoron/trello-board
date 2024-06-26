@@ -3,33 +3,50 @@ import type { Column, Task } from "../types";
 import draggable from "vuedraggable";
 import { nanoid } from "nanoid";
 
-const columns = ref<Column[]>([
+const columns = useLocalStorage<Column[]>(
+  "trelloBoard",
+  [
+    {
+      id: nanoid(),
+      title: "Backlog",
+      tasks: [
+        {
+          id: nanoid(),
+          title: "Create marketing landing page",
+          createdAt: new Date(),
+        },
+        {
+          id: nanoid(),
+          title: "Add new feature",
+          createdAt: new Date(),
+        },
+        {
+          id: nanoid(),
+          title: "Fix bug",
+          createdAt: new Date(),
+        },
+      ],
+    },
+    { id: nanoid(), title: "Selected for Dev", tasks: [] },
+    { id: nanoid(), title: "In Progress", tasks: [] },
+    { id: nanoid(), title: "QA", tasks: [] },
+    { id: nanoid(), title: "Complete", tasks: [] },
+  ],
   {
-    id: nanoid(),
-    title: "Backlog",
-    tasks: [
-      {
-        id: nanoid(),
-        title: "Create marketing landing page",
-        createdAt: new Date(),
+    serializer: {
+      read: (value) => {
+        return JSON.parse(value).map((column: Column) => {
+          column.tasks = column.tasks.map((task: Task) => {
+            task.createdAt = new Date(task.createdAt);
+            return task;
+          });
+          return column;
+        });
       },
-      {
-        id: nanoid(),
-        title: "Add new feature",
-        createdAt: new Date(),
-      },
-      {
-        id: nanoid(),
-        title: "Fix bug",
-        createdAt: new Date(),
-      },
-    ],
-  },
-  { id: nanoid(), title: "Selected for Dev", tasks: [] },
-  { id: nanoid(), title: "In Progress", tasks: [] },
-  { id: nanoid(), title: "QA", tasks: [] },
-  { id: nanoid(), title: "Complete", tasks: [] },
-]);
+      write: (value) => JSON.stringify(value),
+    },
+  }
+);
 
 const alt = useKeyModifier("Alt");
 
