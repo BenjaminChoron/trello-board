@@ -1,8 +1,22 @@
-# Nuxt 3 Minimal Starter
+# Trello Board
+
+Simple Trello Board clone built with Nuxt using VueDraggable, VueUse and TailwindCSS.
+
+Live on [Vercel](https://trello-board-lemon.vercel.app/)
+
+## Features
+
+- Create, edit, and delete columns
+- Drag and drop columns
+- Create and delete tasks
+- Drag and drop tasks within a column or between columns
+- Clone tasks by dragging and dropping them to another column holding the `Alt` key
+
+## Nuxt 3 Minimal Starter
 
 Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
 
-## Setup
+### Setup
 
 Make sure to install the dependencies:
 
@@ -20,7 +34,7 @@ yarn install
 bun install
 ```
 
-## Development Server
+### Development Server
 
 Start the development server on `http://localhost:3000`:
 
@@ -38,7 +52,7 @@ yarn dev
 bun run dev
 ```
 
-## Production
+### Production
 
 Build the application for production:
 
